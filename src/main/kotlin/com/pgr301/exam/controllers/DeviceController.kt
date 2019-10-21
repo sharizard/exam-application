@@ -19,6 +19,24 @@ class DeviceController {
     @Autowired
     private lateinit var crud: DeviceRepository
 
+    @GetMapping
+    fun getAll(): ResponseEntity<List<String>> {
+        return ResponseEntity.ok(crud.findAll().map { Gson().toJson(it) })
+    }
+
+    @GetMapping(path = ["/{id}"])
+    fun getOne(@PathVariable("id") pathId: String?): ResponseEntity<String> {
+
+        val id: Long
+        try {
+            id = pathId!!.toLong()
+        } catch (e: Exception) {
+            return ResponseEntity.status(404).build()
+        }
+
+        return ResponseEntity.ok(Gson().toJson(crud.findById(id)))
+    }
+
     @PostMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     fun createDevice(@RequestBody device: Device): ResponseEntity<String> {
         if (device.id != null || device.name.isNullOrBlank() || device.owner.isNullOrBlank()) {

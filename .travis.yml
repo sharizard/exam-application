@@ -1,4 +1,10 @@
 language: java
+
+services:
+  - docker
+
+script: gradle build
+
 deploy:
   provider: heroku
   app: damp-refuge-11636
