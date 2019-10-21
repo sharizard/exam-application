@@ -1,12 +1,10 @@
 package com.pgr301.exam.controllers
 
-import com.fasterxml.jackson.databind.util.JSONPObject
 import com.google.common.base.Throwables
 import com.google.gson.Gson
 import com.pgr301.exam.entities.Device
 import com.pgr301.exam.entities.Measurement
 import com.pgr301.exam.repositories.DeviceRepository
-import jdk.nashorn.internal.runtime.JSONFunctions
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
