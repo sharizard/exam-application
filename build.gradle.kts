@@ -18,6 +18,7 @@ repositories {
 
 dependencies {
     implementation("com.google.guava:guava:28.1-jre")
+    implementation("io.micrometer:micrometer-core")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
