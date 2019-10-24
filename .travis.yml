@@ -9,9 +9,11 @@ env:
     - secure: bC2orSP8wd+KxsypZFqFZkIRKZeOJzk/zPv4Of3QUaOjGKhtNhhhCT13ifOpwOtxyqpSPXD93EWlEtMbRQsbaLkOzBAXzzIJ1nfZHiy/NJgygexqlbV6E8uVYPnRLllG1DtRAk3VPyHD0LTO5zvvuK4vz3Y1wmNgOlA2nnZ/eju96IwZ/MH4bKHOOShW66cpV3s8XMmjC1ksX0yq7WEUtMfApIBN5ih7b+9W/QkbIg9K566Hhax0rYEGGiE6Xe/qylJrpzkP6kgi+7HdkW2UQSZyw4+VDfnKu6ClNwo0+8+BrTtb5yw+xWKBhsmxJl4coRVW40gOztBqv9vVEi4e/stWxd5kovnydoRoCnr8e8Yb4wpbA3hg62/MsKaDnuWARm75BoJK2hBRuDrO9mHL9tCsueEuQ6NC4MlLy1BhV98ZlW+WTK3lCMEx20Tvn00/fXxaz5kC+9k4Plv8RFxd1Bj5gpHr+zPuf6F4Xu6aj6Vrfy9y2v8U9sDC+RcBm3pZuwMqWIY5TqqgyLu3s3Dqlma04PAVlcl/cp9FSgQbpRbbsw1UgQKOPHWibCv+ArXQX7S/yry8lm3T+1Y+3KtRzqDu3TWMhv8rKA4o21jCt8+byqPJie0LNHRa0dtJGClvUYs3GFvJENsVERvavvIWUSAs/P21P0YL4xZNndEnOX0=
     # DOCKER_TOKEN
     - secure: E7hEGS1bOjPNZsQOQdTMFs7LI6RwGPqeoz1L6jMXQzAcrRXDO2d1//IneauX7MzZ5xkufowpAtHGD74ceLn5Ej7pLGR2Ca4/rLlyi29bGIXZRH1kTNcNTgf/Py+qusMx1dW9rBgVOrmMz5dK56iZW2jDSZ/yDPuAruxIHrF0/+dzPlqesRt8BlrVwQmfjUJbA+6bfdZXu+boI2exSGkRjDFTXFqZbQtSRSdEBMvBeJuaRTruSz7MTKeF88kJ6t4Q62oBEOxVOJdR1J3r6w3lsUBubP33kOJEwnvpTUB77zz6vYgitaPSY1ZhrU1l3N1MTT61NLvMeaKDDBQl0MbVqKRQAJG5g/KDBczy8M/aPuvl9/SiSWHSCjhjIne4v56/76+VEHEK8OjVIZTfGLHUBTBlKjnE2hcV3y15jT1KqVwGyEvSnaglJVT2rR7ev8sAXSzSVBqcOrhdo4JZ3lfo8BEGt39jnxn4e9Kz+YM1vvOt5Bz42ATZqtkXC6ZPqdJdBZfvHRxhMaXDMTVmWCRwUTyVF775vG8gC807naRlxar607/VAv2/OrOIB4uuh84EqHTSBndpLLuxo4D1nWrNUOFTghAV9Z1IBlfJ81gMOopHgNEJgjKF3jitJAFeYY+z+0gdG50FR0kVRRI7Kv3oJxCwk7viMoep7iABzHpuHz0=
+    # LOGZ_IO_TOKEN
+    - secure: SbO8HKMzARnJ3nRpoRIROnLgfwgNX2gbdn3ljjZqWFE0x2hQJqJCB7gOxD7gsQz0ebecTSANY1UYgVYoPlCh2Q8UDltiPIpP1sKYzVys7iIICzgbMQ+qIn2+3RS5lAm0+Q+ALW19g+g+PRfKV2atXxRH4fI07D/JTcdwytooi1dUA93Yblbe5+Sj98YzTR9W+6NKIAqtdE3UvQQ8owmlyKuxqzkrreZkbTDgWJz9PEjMIQuGfjnCUVV2KbXpYn5Jj78CmkZcaRj5jtxRuMXFTl1W4tT+RryPefOhE4aWKHbfeFRnLAK6QhtrpCgQwuE8I+iK7oaXgiDVtCd5CfCMk05Qjn8chyzvxc13RUfPVirB+zGPDJObpJQgkRRuhAJX6PcWK4p6ZOtEsjB/tqJkgoqX8DBLZKwaK0OY17UUitLS4dl/1JY2T2GNWrxKxsuDR9Oi5JQj7qSlOzs+65U1joFCTafGxAXKLPyAk3GedlHx0tnQKbeQ5fSC4qwdFZOo3qoBcTcZkxjS3vRuO43Xr0xJVTfmhtZGOhBPa2zM534U1s86a0f04jlpWVX5EdqV/4IZK+/ZWe+/0rnp5gs/f0Dkq7loCaQOD5XU6Ry1UOLDoWY8rPCp0RDkZH+oLb4OC0B421MWrCIK7KesKm+z13mSxWD+d7hhcXkFAw/LvTI=
 script:
-  - gradle build
-  - docker build . --tag pgr301exam --build-arg JAR_FILE=./build/libs/exam-0.0.1.jar
-  - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
-  - docker tag pgr301exam $DOCKER_USER/pgr301exam
-  - docker push $DOCKER_USER/pgr301exam
+- gradle build
+- docker build . --tag pgr301exam --build-arg JAR_FILE=./build/libs/exam-0.0.1.jar
+- docker login -u $DOCKER_USER -p $DOCKER_TOKEN
+- docker tag pgr301exam $DOCKER_USER/pgr301exam
+- docker push $DOCKER_USER/pgr301exam
