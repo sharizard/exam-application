@@ -22,6 +22,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("io.springfox:springfox-swagger2:2.9.2")
+    implementation("io.springfox:springfox-swagger-ui:2.9.2")
     implementation("io.micrometer:micrometer-registry-influx:latest.release")
     implementation("com.google.code.gson:gson")
     implementation("io.logz.logback:logzio-logback-appender:latest.release")
