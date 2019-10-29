@@ -1,9 +1,7 @@
 package com.pgr301.exam
 
-import io.micrometer.core.instrument.MeterRegistry
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -18,19 +16,15 @@ import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 import java.net.URI
 
-
 @SpringBootApplication
 @EnableSwagger2
 class ExamApplication {
-    @Autowired
-    private lateinit var meterRegistry: MeterRegistry
-
     @RequestMapping(path = ["/"], produces = [(MediaType.APPLICATION_JSON_VALUE)])
     @RestController
     class HomeController {
         @GetMapping
         fun landing() : ResponseEntity<String>{
-            // We just return the api docs as when going to root.
+            // We just return the api docs when going to root.
             return ResponseEntity.status(301).location(URI.create("/v2/api-docs")).build()
         }
     }

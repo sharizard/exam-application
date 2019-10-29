@@ -1,19 +1,20 @@
 package com.pgr301.exam.entities
 
+import com.fasterxml.jackson.annotation.JsonBackReference
+import com.pgr301.exam.SievertUnit
 import com.sun.istack.NotNull
+import java.math.BigDecimal
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
+import javax.persistence.*
 import javax.validation.constraints.NotBlank
 
 @Entity
 data class Measurement(
-        @Id @GeneratedValue val id: Long? = null,
-        @NotNull var deviceId: Long? = null,
-        @NotBlank var sievert: String? = null,
+        @NotBlank var value: BigDecimal? = null,
+        @NotNull var unit: SievertUnit? = null,
         @NotNull var readingTime: LocalDateTime? = null,
-        @NotNull var longitude: Long? = null,
-        @NotNull var latitude: Long? = null
+        @NotNull var longitude: BigDecimal? = null,
+        @NotNull var latitude: BigDecimal? = null,
+        @JsonBackReference @NotNull @ManyToOne var device: Device? = null
 ) : TimeStamps()
 
