@@ -22,12 +22,11 @@ class DeviceControllerTests {
         RestAssured.port = port
 
         given().header("Content-Type", "application/json")
-                .body("{ \"name\": \"test\", \"owner\": \"foo\"}")
+                .body("{ \"name\": \"test\", \"owner\": \"foo\" }")
                 .post("http://localhost:$port/devices")
                 .then()
                 .statusCode(201)
-                .and()
-                .body("name", equalTo("test"))
-                .body("owner", equalTo("foo"))
+                .body("data.name", equalTo("test"))
+                .body("data.owner", equalTo("foo"))
     }
 }
