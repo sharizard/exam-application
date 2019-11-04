@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank
 
 @Entity
 data class Measurement(
-        @NotBlank var value: BigDecimal? = null,
+        @NotBlank var value: Double? = null,
         @NotNull var unit: SievertUnit? = null,
         @NotNull var readingTime: LocalDateTime? = null,
         @NotNull var longitude: BigDecimal? = null,

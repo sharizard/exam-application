@@ -4,6 +4,7 @@ import com.google.common.base.Throwables
 import com.pgr301.exam.*
 import com.pgr301.exam.entities.Device
 import com.pgr301.exam.repositories.DeviceRepository
+import io.micrometer.core.annotation.Timed
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.slf4j.Marker
@@ -28,12 +29,14 @@ class DeviceController : ActionController() {
     @Autowired
     private lateinit var deviceRepository: DeviceRepository
 
+    @Timed(value = "get_devices", percentiles = [0.5, 0.9, 0.99], histogram = true, longTask = true)
     @GetMapping
     fun index(): ResponseEntity<WrappedResponse<List<Device>>> {
         metrics.indexDeviceCounter().increment()
         return response(status= HttpStatus.OK, data = deviceRepository.findAll().toList())
     }
 
+    @Timed(value = "get_device", percentiles = [0.5, 0.9, 0.99], histogram = true)
     @GetMapping(path = ["/{id}"])
     fun show(@PathVariable("id") pathId: String): ResponseEntity<WrappedResponse<Device>> {
         metrics.showDeviceCounter().increment()
@@ -54,7 +57,7 @@ class DeviceController : ActionController() {
             response(status = HttpStatus.NOT_FOUND, message = "Couldn't find Device with id: $id")
         }
     }
-
+    @Timed(value = "create_device", percentiles = [0.5, 0.9, 0.99], histogram = true)
     @PostMapping(consumes = [(MediaType.APPLICATION_JSON_VALUE)])
     fun create(@RequestBody device: Device): ResponseEntity<WrappedResponse<Device>> {
         metrics.createDeviceCounter().increment()

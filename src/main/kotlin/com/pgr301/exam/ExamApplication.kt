@@ -1,5 +1,7 @@
 package com.pgr301.exam
 
+import io.micrometer.core.instrument.MeterRegistry
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
@@ -19,6 +21,7 @@ import java.net.URI
 @SpringBootApplication
 @EnableSwagger2
 class ExamApplication {
+
     @RequestMapping(path = ["/"], produces = [(MediaType.APPLICATION_JSON_VALUE)])
     @RestController
     class HomeController {

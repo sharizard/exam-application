@@ -8,16 +8,19 @@ import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.math.BigDecimal
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import javax.persistence.EntityManager
 import javax.transaction.Transactional
 
 
 @Repository
-interface MeasurementRepository : CrudRepository<Measurement, Long>, MeasurementRepositoryCustom
+interface MeasurementRepository : CrudRepository<Measurement, Long>, MeasurementRepositoryCustom {
+    fun findAllByUnitEqualsAndCreatedAtAfter(unit: SievertUnit, createdAt: ZonedDateTime) : List<Measurement>
+}
 
 @Transactional
 interface MeasurementRepositoryCustom {
-    fun createMeasurement(value: BigDecimal, unit: SievertUnit, longitude: BigDecimal, latitude: BigDecimal, readingTime: LocalDateTime, device: Device): Long
+    fun createMeasurement(value: Double, unit: SievertUnit, longitude: BigDecimal, latitude: BigDecimal, readingTime: LocalDateTime, device: Device): Long
 }
 
 @Repository
@@ -26,7 +29,7 @@ class MeasurementRepositoryCustomImpl : MeasurementRepositoryCustom {
     @Autowired
     private lateinit var em: EntityManager
 
-    override fun createMeasurement(value: BigDecimal, unit: SievertUnit, longitude: BigDecimal, latitude: BigDecimal, readingTime: LocalDateTime, device: Device): Long {
+    override fun createMeasurement(value: Double, unit: SievertUnit, longitude: BigDecimal, latitude: BigDecimal, readingTime: LocalDateTime, device: Device): Long {
         val entity = Measurement(value = value, unit = unit, longitude = longitude, latitude = latitude, readingTime = readingTime, device = device)
         em.persist(entity)
         return entity.id!!
